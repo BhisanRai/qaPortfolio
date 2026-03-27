@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bhisan Rai | QA Engineer</title>
+<meta name="description" content="QA Engineer specializing in automation, API and performance testing">
+
+<link rel="preload" href="style.css" as="style">
+<link rel="stylesheet" href="style.css">
+
+<meta name="theme-color" content="#0f172a">
+</head>
+
+<body>
+
+<header class="header">
+  <nav class="nav container" aria-label="Main Navigation">
+    <h1 class="logo">Bhisan Rai</h1>
+
+    <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Impact</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><button id="themeToggle" aria-label="Toggle dark mode">🌙</button></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero container">
+  <h2>Delivering Stable, High-Performance & Bug-Free Software</h2>
+  <p>
+    QA Engineer with 2.5+ years experience in Manual, Automation, API and Performance testing.
+    Specialized in VOIP systems and real-time applications.
+  </p>
+
+  <div class="hero-buttons">
+    <a href="#projects" class="btn primary">View My Impact</a>
+    <a href="BHISAN_RAI_CV.pdf" download class="btn secondary">Download CV</a>
+  </div>
+</section>
+
+<!-- METRICS -->
+<section class="metrics container">
+  <div class="metric"><span class="counter" data-target="120">0</span>+ Bugs Found</div>
+  <div class="metric"><span class="counter" data-target="40">0</span>% Faster Regression</div>
+  <div class="metric"><span class="counter" data-target="99">0</span>% Stability</div>
+</section>
+
+<!-- DASHBOARD -->
+<section class="dashboard container">
+  <h2>QA Performance Insights</h2>
+  <div class="dashboard-grid">
+    <div class="card"><h3>Regression Coverage</h3><p>85%</p></div>
+    <div class="card"><h3>Automation Growth</h3><p>+60%</p></div>
+    <div class="card"><h3>Defect Leakage</h3><p>< 2%</p></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="container section">
+  <h2>About Me</h2>
+  <p>
+    QA Engineer at Dialaxy specializing in VOIP platform testing including Web, Mobile, Desktop and Chrome Extension.
+    Strong expertise in Postman, JMeter, Cypress and Playwright with focus on delivering reliable and scalable systems.
+  </p>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="container section">
+  <h2>Skills Matrix</h2>
+  <div class="skills-grid">
+    <div class="skill-card">Manual Testing</div>
+    <div class="skill-card">API Testing (Postman)</div>
+    <div class="skill-card">Automation (Cypress, Playwright)</div>
+    <div class="skill-card">Performance (JMeter)</div>
+    <div class="skill-card">Regression Testing</div>
+    <div class="skill-card">Bug Tracking</div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="container section">
+  <h2>Case Studies & Impact</h2>
+
+  <div class="filters">
+    <button data-filter="all">All</button>
+    <button data-filter="automation">Automation</button>
+    <button data-filter="api">API</button>
+    <button data-filter="manual">Manual</button>
+  </div>
+
+  <div class="projects-grid">
+
+    <article class="project-card" data-category="automation">
+      <h3>VOIP Platform Testing</h3>
+      <p><strong>Challenge:</strong> Real-time voice reliability</p>
+      <p><strong>Strategy:</strong> Automation + Load Testing</p>
+      <p><strong>Impact:</strong> Improved system uptime</p>
+      <button class="open-modal">View Test Case</button>
+    </article>
+
+    <article class="project-card" data-category="api">
+      <h3>API Integration Testing</h3>
+      <p><strong>Challenge:</strong> Backend failures</p>
+      <p><strong>Strategy:</strong> Postman automation</p>
+      <p><strong>Impact:</strong> Reduced integration bugs</p>
+      <button class="open-modal">View Test Case</button>
+    </article>
+
+    <article class="project-card" data-category="manual">
+      <h3>UI/UX Testing</h3>
+      <p><strong>Challenge:</strong> Cross-platform issues</p>
+      <p><strong>Strategy:</strong> Manual testing</p>
+      <p><strong>Impact:</strong> Better UX consistency</p>
+      <button class="open-modal">View Test Case</button>
+    </article>
+
+  </div>
+</section>
+
+<!-- MODAL -->
+<div id="modal" class="modal" role="dialog">
+  <div class="modal-content large">
+    <span class="close">&times;</span>
+
+    <h3>Test Case Viewer</h3>
+
+    <div class="test-case">
+      <p><strong>ID:</strong> TC-VOIP-001</p>
+      <p><strong>Feature:</strong> Call Routing</p>
+      <p><strong>Priority:</strong> High</p>
+
+      <h4>Steps:</h4>
+      <ol>
+        <li>Login</li>
+        <li>Make call</li>
+        <li>Verify routing</li>
+      </ol>
+
+      <h4>Expected:</h4>
+      <p>Call connects within 2 seconds</p>
+
+      <span class="status pass">PASS</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact" class="container section">
+  <h2>Contact</h2>
+
+  <form class="contact-form">
+    <label>Name<input type="text" required></label>
+    <label>Email<input type="email" required></label>
+    <label>Message<textarea required></textarea></label>
+    <button class="btn primary">Send</button>
+  </form>
+
+  <div class="social-links">
+    <a href="#">LinkedIn</a>
+    <a href="#">GitHub</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <p>© 2026 Bhisan Rai</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
