@@ -1,179 +1,1078 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bhisan Rai — QA Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<title>Bhisan Rai | QA Engineer</title>
-<meta name="description" content="QA Engineer specializing in automation, API and performance testing">
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #1a1a24;
+    --accent: #00e5a0;
+    --accent2: #00b8ff;
+    --accent3: #ff6b6b;
+    --text: #f0f0f0;
+    --muted: #8888a0;
+    --border: rgba(255,255,255,0.08);
+    --card: rgba(255,255,255,0.04);
+    --glow: 0 0 40px rgba(0,229,160,0.15);
+  }
 
-<link rel="preload" href="style.css" as="style">
-<link rel="stylesheet" href="style.css">
+  html { scroll-behavior: smooth; }
 
-<meta name="theme-color" content="#0f172a">
+  body {
+    font-family: 'Sora', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(10,10,15,0.7);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    font-weight: 500;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 3rem 4rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  /* ─── TYPING EFFECT ─── */
+  .typing-wrap {
+    font-size: 1.1rem;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    min-height: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .typing-prefix {
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  #typed-text {
+    color: var(--accent2);
+    font-weight: 500;
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    background: var(--accent2);
+    margin-left: 2px;
+    animation: blink 0.9s step-end infinite;
+    vertical-align: middle;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    font-family: 'Sora', sans-serif;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #000;
+  }
+
+  .btn-primary:hover {
+    background: #00ffb3;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,229,160,0.3);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* ─── HERO RIGHT: STATUS CARD ─── */
+  .hero-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,229,160,0.12), transparent 70%);
+    pointer-events: none;
+  }
+
+  .status-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-right: 8px;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0,229,160,0.6); }
+    50% { box-shadow: 0 0 0 6px rgba(0,229,160,0); }
+  }
+
+  .status-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .card-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .stat-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+  }
+
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-top: 0.25rem;
+    letter-spacing: 0.05em;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 3px;
+    background: rgba(0,229,160,0.08);
+    color: var(--accent);
+    border: 1px solid rgba(0,229,160,0.2);
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── SECTIONS ─── */
+  section {
+    padding: 6rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-header {
+    margin-bottom: 3.5rem;
+  }
+
+  .section-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ─── SKILLS SECTION ─── */
+  .skills-filter {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+
+  .filter-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    padding: 0.45rem 1rem;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+
+  .filter-btn.active,
+  .filter-btn:hover {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+    font-weight: 500;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    transition: all 0.3s;
+    cursor: default;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .skill-card.hidden {
+    display: none;
+  }
+
+  .skill-card:hover {
+    border-color: rgba(0,229,160,0.3);
+    background: rgba(0,229,160,0.04);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+
+  .skill-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+  }
+
+  .skill-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .skill-level {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    letter-spacing: 0.05em;
+  }
+
+  .level-advanced { background: rgba(0,229,160,0.12); color: var(--accent); }
+  .level-intermediate { background: rgba(0,184,255,0.12); color: var(--accent2); }
+  .level-learning { background: rgba(255,107,107,0.12); color: var(--accent3); }
+
+  .skill-bar-bg {
+    height: 3px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .skill-bar {
+    height: 100%;
+    border-radius: 99px;
+    width: 0;
+    transition: width 1s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .bar-green { background: linear-gradient(90deg, var(--accent), #00b8ff); }
+  .bar-blue  { background: linear-gradient(90deg, var(--accent2), #a78bfa); }
+  .bar-red   { background: linear-gradient(90deg, var(--accent3), #ff9f43); }
+
+  .skill-category {
+    font-size: 0.68rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* ─── TIMELINE ─── */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+
+  .tl-item {
+    position: relative;
+    padding: 0 0 3.5rem 2rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.6s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .tl-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .tl-dot {
+    position: absolute;
+    left: -2rem;
+    top: 6px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--accent);
+    transform: translateX(calc(-50% + 0.5px));
+  }
+
+  .tl-dot.current {
+    background: var(--accent);
+    box-shadow: 0 0 12px rgba(0,229,160,0.5);
+  }
+
+  .tl-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .tl-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+  }
+
+  .tl-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+  }
+
+  .badge-qa { background: rgba(0,229,160,0.1); color: var(--accent); }
+  .badge-intern { background: rgba(0,184,255,0.1); color: var(--accent2); }
+  .badge-mgmt { background: rgba(255,107,107,0.1); color: var(--accent3); }
+  .badge-edu { background: rgba(255,159,67,0.1); color: #ff9f43; }
+
+  .tl-company {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    margin-bottom: 0.25rem;
+  }
+
+  .tl-role {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .tl-points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .tl-points li {
+    font-size: 0.85rem;
+    color: rgba(240,240,240,0.75);
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.55;
+  }
+
+  .tl-points li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.75rem;
+  }
+
+  /* ─── CONTACT ─── */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.2s;
+  }
+
+  .contact-link:hover {
+    border-color: rgba(0,229,160,0.4);
+    background: rgba(0,229,160,0.04);
+    transform: translateX(4px);
+  }
+
+  .contact-icon {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    min-width: 3rem;
+    text-align: center;
+    padding: 0.4rem 0.6rem;
+    background: rgba(0,229,160,0.08);
+    border-radius: 4px;
+  }
+
+  .contact-text { font-size: 0.85rem; }
+
+  .contact-bio {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-mono {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  /* ─── GLOW BG BLOBS ─── */
+  .blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.15;
+  }
+
+  .blob-1 {
+    width: 500px; height: 500px;
+    background: var(--accent);
+    top: -150px; right: -100px;
+  }
+
+  .blob-2 {
+    width: 400px; height: 400px;
+    background: var(--accent2);
+    bottom: 20%; left: -150px;
+  }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    #hero { padding: 7rem 1.5rem 3rem; }
+    .hero-grid { grid-template-columns: 1fr; }
+    section { padding: 4rem 1.5rem; }
+    .contact-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
 </head>
-
 <body>
 
-<header class="header">
-  <nav class="nav container" aria-label="Main Navigation">
-    <h1 class="logo">Bhisan Rai</h1>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Impact</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><button id="themeToggle" aria-label="Toggle dark mode">🌙</button></li>
-    </ul>
-  </nav>
-</header>
+<!-- BG BLOBS -->
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
 
-<main>
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">BR_QA</a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#timeline">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-<!-- HERO -->
-<section class="hero container">
-  <h2>Delivering Stable, High-Performance & Bug-Free Software</h2>
-  <p>
-    QA Engineer with 2.5+ years experience in Manual, Automation, API and Performance testing.
-    Specialized in VOIP systems and real-time applications.
-  </p>
-
-  <div class="hero-buttons">
-    <a href="#projects" class="btn primary">View My Impact</a>
-    <a href="BHISAN_RAI_CV.pdf" download class="btn secondary">Download CV</a>
-  </div>
-</section>
-
-<!-- METRICS -->
-<section class="metrics container">
-  <div class="metric"><span class="counter" data-target="120">0</span>+ Bugs Found</div>
-  <div class="metric"><span class="counter" data-target="40">0</span>% Faster Regression</div>
-  <div class="metric"><span class="counter" data-target="99">0</span>% Stability</div>
-</section>
-
-<!-- DASHBOARD -->
-<section class="dashboard container">
-  <h2>QA Performance Insights</h2>
-  <div class="dashboard-grid">
-    <div class="card"><h3>Regression Coverage</h3><p>85%</p></div>
-    <div class="card"><h3>Automation Growth</h3><p>+60%</p></div>
-    <div class="card"><h3>Defect Leakage</h3><p>< 2%</p></div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about" class="container section">
-  <h2>About Me</h2>
-  <p>
-    QA Engineer at Dialaxy specializing in VOIP platform testing including Web, Mobile, Desktop and Chrome Extension.
-    Strong expertise in Postman, JMeter, Cypress and Playwright with focus on delivering reliable and scalable systems.
-  </p>
-</section>
-
-<!-- SKILLS -->
-<section id="skills" class="container section">
-  <h2>Skills Matrix</h2>
-  <div class="skills-grid">
-    <div class="skill-card">Manual Testing</div>
-    <div class="skill-card">API Testing (Postman)</div>
-    <div class="skill-card">Automation (Cypress, Playwright)</div>
-    <div class="skill-card">Performance (JMeter)</div>
-    <div class="skill-card">Regression Testing</div>
-    <div class="skill-card">Bug Tracking</div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects" class="container section">
-  <h2>Case Studies & Impact</h2>
-
-  <div class="filters">
-    <button data-filter="all">All</button>
-    <button data-filter="automation">Automation</button>
-    <button data-filter="api">API</button>
-    <button data-filter="manual">Manual</button>
-  </div>
-
-  <div class="projects-grid">
-
-    <article class="project-card" data-category="automation">
-      <h3>VOIP Platform Testing</h3>
-      <p><strong>Challenge:</strong> Real-time voice reliability</p>
-      <p><strong>Strategy:</strong> Automation + Load Testing</p>
-      <p><strong>Impact:</strong> Improved system uptime</p>
-      <button class="open-modal">View Test Case</button>
-    </article>
-
-    <article class="project-card" data-category="api">
-      <h3>API Integration Testing</h3>
-      <p><strong>Challenge:</strong> Backend failures</p>
-      <p><strong>Strategy:</strong> Postman automation</p>
-      <p><strong>Impact:</strong> Reduced integration bugs</p>
-      <button class="open-modal">View Test Case</button>
-    </article>
-
-    <article class="project-card" data-category="manual">
-      <h3>UI/UX Testing</h3>
-      <p><strong>Challenge:</strong> Cross-platform issues</p>
-      <p><strong>Strategy:</strong> Manual testing</p>
-      <p><strong>Impact:</strong> Better UX consistency</p>
-      <button class="open-modal">View Test Case</button>
-    </article>
-
-  </div>
-</section>
-
-<!-- MODAL -->
-<div id="modal" class="modal" role="dialog">
-  <div class="modal-content large">
-    <span class="close">&times;</span>
-
-    <h3>Test Case Viewer</h3>
-
-    <div class="test-case">
-      <p><strong>ID:</strong> TC-VOIP-001</p>
-      <p><strong>Feature:</strong> Call Routing</p>
-      <p><strong>Priority:</strong> High</p>
-
-      <h4>Steps:</h4>
-      <ol>
-        <li>Login</li>
-        <li>Make call</li>
-        <li>Verify routing</li>
-      </ol>
-
-      <h4>Expected:</h4>
-      <p>Call connects within 2 seconds</p>
-
-      <span class="status pass">PASS</span>
+<!-- ─── HERO ─── -->
+<div id="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-eyebrow">Quality Assurance Engineer</div>
+      <h1 class="hero-name">
+        Bhisan<br><em>Rai</em>
+      </h1>
+      <div class="typing-wrap">
+        <span class="typing-prefix">Specializing in</span>
+        <span id="typed-text"></span><span class="cursor"></span>
+      </div>
+      <div class="hero-cta">
+        <a href="#timeline" class="btn btn-primary">View Experience</a>
+        <a href="mailto:bhisanyamphurai@gmail.com" class="btn btn-outline">Get in Touch</a>
+      </div>
     </div>
 
+    <div class="hero-card">
+      <div>
+        <span class="status-dot"></span>
+        <span class="status-label">Open to opportunities</span>
+      </div>
+      <div class="card-stats">
+        <div class="stat-item">
+          <div class="stat-num">2+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Testing Domains</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Automation Tools</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">VOIP</div>
+          <div class="stat-label">Core Domain</div>
+        </div>
+      </div>
+      <div class="card-tags">
+        <span class="tag">Postman</span>
+        <span class="tag">Cypress</span>
+        <span class="tag">Playwright</span>
+        <span class="tag">Appium</span>
+        <span class="tag">JMeter</span>
+        <span class="tag">Agile</span>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- CONTACT -->
-<section id="contact" class="container section">
-  <h2>Contact</h2>
+<div class="divider"></div>
 
-  <form class="contact-form">
-    <label>Name:    <input type="text" required></label>
-    <label>Email:   <input type="email" required></label>
-    <label>Message: <input type="text" required></label>
-    <button class="btn primary">Send</button>
-  </form>
+<!-- ─── SKILLS ─── -->
+<section id="skills">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">Technical Arsenal</div>
+    <h2 class="section-title">Skills &amp; <em>Expertise</em></h2>
+  </div>
 
-  <div class="social-links">
-    <a href="https://www.linkedin.com/in/bhisan-rai-428916180?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app">LinkedIn</a>
-    <!-- <a href="#">GitHub</a> -->
+  <div class="skills-filter reveal">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="testing">Testing</button>
+    <button class="filter-btn" data-filter="automation">Automation</button>
+    <button class="filter-btn" data-filter="api">API</button>
+    <button class="filter-btn" data-filter="performance">Performance</button>
+    <button class="filter-btn" data-filter="soft">Soft Skills</button>
+  </div>
+
+  <div class="skills-grid" id="skills-grid">
+    <!-- Testing -->
+    <div class="skill-card" data-cat="testing">
+      <div class="skill-top">
+        <span class="skill-name">Manual Testing</span>
+        <span class="skill-level level-advanced">Advanced</span>
+      </div>
+      <div class="skill-bar-bg"><div class="skill-bar bar-green" data-w="95"></div></div>
+      <div class="skill-category">Testing</div>
+    </div>
+    <div class="skill-card" data-cat="testing">
+      <div class="skill-top">
+        <span class="skill-name">Regression Testing</span>
+        <span class="skill-level level-advanced">Advanced</span>
+      </div>
+      <div class="skill-bar-bg"><div class="skill-bar bar-green" data-w="90"></div></div>
+      <div class="skill-category">Testing</div>
+    </div>
+    <div class="skill-card" data-cat="testing">
+      <div class="skill-top">
+        <span class="skill-name">Smoke Testing</span>
+        <span class="skill-level level-advanced">Advanced</span>
+      </div>
+      <div class="skill-bar-bg"><div class="skill-bar bar-green" data-w="90"></div></div>
+      <div class="skill-category">Testing</div>
+    </div>
+    <div class="skill-card" data-cat="testing">
+      <div class="skill-top">
+        <span class="skill-name">UI/UX Testing</span>
+        <span class="skill-level level-advanced">Advanced</span>
+      </div>
+      <div class="skill-bar-bg"><div class="skill-bar bar-green" data-w="88"></div></div>
+      <div class="skill-category">Testing</div>
+    </div>
+    <!-- API -->
+    <div class="skill-card" data-cat="api">
+      <div class="skill-top">
+        <span class="skill-name">Postman (Advanced)</span>
+        <span class="skill-level level-advanced">Advanced</span>
+      </div>
+      <div class="skill-bar-bg"><div class="skill-bar bar-green" data-w="92"></div></div>
+      <div class="skill-category">API</div>
+    </div>
+    <div class="skill-card" data-cat="api">
+      <div class="skill-top">
+        <span class="skill-name">RESTful API Validation</span>
+        <span class="skill-level level-advanced">Advanced</span>
+      </div>
+      <div class="skill-bar-bg"><div class="skill-bar bar-green" data-w="88"></div></div>
+      <div class="skill-category">API</div>
+    </div>
+    <!-- Automation -->
+    <div class="skill-card" data-cat="automation">
+      <div class="skill-top">
+        <span class="skill-name">Cypress</span>
+        <span class="skill-level level-intermediate">1+ Year</span>
+      </div>
+      <div class="skill-bar-bg"><div class="skill-bar bar-blue" data-w="78"></div></div>
+      <div class="skill-category">Automation</div>
+    </div>
+    <div class="skill-card" data-cat="automation">
+      <div class="skill-top">
+        <span class="skill-name">Playwright</span>
+        <span class="skill-level level-intermediate">1+ Year</span>
+      </div>
+      <div class="skill-bar-bg"><div class="skill-bar bar-blue" data-w="76"></div></div>
+      <div class="skill-category">Automation</div>
+    </div>
+    <div class="skill-card" data-cat="automation">
+      <div class="skill-top">
+        <span class="skill-name">Appium</span>
+        <span class="skill-level level-intermediate">1+ Year</span>
+      </div>
+      <div class="skill-bar-bg"><div class="skill-bar bar-blue" data-w="72"></div></div>
+      <div class="skill-category">Automation</div>
+    </div>
+    <!-- Performance -->
+    <div class="skill-card" data-cat="performance">
+      <div class="skill-top">
+        <span class="skill-name">JMeter</span>
+        <span class="skill-level level-intermediate">1+ Year</span>
+      </div>
+      <div class="skill-bar-bg"><div class="skill-bar bar-blue" data-w="75"></div></div>
+      <div class="skill-category">Performance</div>
+    </div>
+    <div class="skill-card" data-cat="performance">
+      <div class="skill-top">
+        <span class="skill-name">Load &amp; Stress Testing</span>
+        <span class="skill-level level-intermediate">Intermediate</span>
+      </div>
+      <div class="skill-bar-bg"><div class="skill-bar bar-blue" data-w="70"></div></div>
+      <div class="skill-category">Performance</div>
+    </div>
+    <!-- Soft -->
+    <div class="skill-card" data-cat="soft">
+      <div class="skill-top">
+        <span class="skill-name">Agile Methodology</span>
+        <span class="skill-level level-advanced">Advanced</span>
+      </div>
+      <div class="skill-bar-bg"><div class="skill-bar bar-green" data-w="85"></div></div>
+      <div class="skill-category">Soft Skills</div>
+    </div>
+    <div class="skill-card" data-cat="soft">
+      <div class="skill-top">
+        <span class="skill-name">SRS Documentation</span>
+        <span class="skill-level level-advanced">Advanced</span>
+      </div>
+      <div class="skill-bar-bg"><div class="skill-bar bar-green" data-w="82"></div></div>
+      <div class="skill-category">Soft Skills</div>
+    </div>
+    <div class="skill-card" data-cat="soft">
+      <div class="skill-top">
+        <span class="skill-name">Bug Reporting</span>
+        <span class="skill-level level-advanced">Advanced</span>
+      </div>
+      <div class="skill-bar-bg"><div class="skill-bar bar-green" data-w="90"></div></div>
+      <div class="skill-category">Soft Skills</div>
+    </div>
   </div>
 </section>
 
-</main>
+<div class="divider"></div>
 
-<footer class="footer">
-  <p>© 2026 Bhisan Rai</p>
+<!-- ─── TIMELINE ─── -->
+<section id="timeline">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">Career Journey</div>
+    <h2 class="section-title">Experience &amp; <em>Education</em></h2>
+  </div>
+
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-dot current"></div>
+      <div class="tl-meta">
+        <span class="tl-date">2023 – Present</span>
+        <span class="tl-badge badge-qa">QA Engineer</span>
+      </div>
+      <div class="tl-company">Dialaxy</div>
+      <div class="tl-role">Quality Assurance — VOIP Platform</div>
+      <ul class="tl-points">
+        <li>Led QA for the Dialaxy VOIP platform — voice quality, call routing, SMS functionality.</li>
+        <li>Conducted extensive API validation using Postman for communication protocol integrations.</li>
+        <li>Built end-to-end automation scripts with Appium, Cypress, and Playwright.</li>
+        <li>Ran JMeter stress &amp; load tests on VOIP servers for peak-traffic stability.</li>
+        <li>Performed manual testing across Web, Mobile, Desktop Agent, and Chrome Extension.</li>
+      </ul>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-meta">
+        <span class="tl-date">2023 – Present</span>
+        <span class="tl-badge badge-intern">Associate QA</span>
+      </div>
+      <div class="tl-company">Codavatar Pvt. Ltd.</div>
+      <div class="tl-role">QA Intern / Associate QA</div>
+      <ul class="tl-points">
+        <li>Collaborated cross-functionally to identify, document, and track software defects.</li>
+        <li>Gathered Software Requirement Specifications (SRS) to align dev with client needs.</li>
+        <li>Executed manual testing for UI/UX consistency across Web and Android.</li>
+      </ul>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-meta">
+        <span class="tl-date">2022 – 2023</span>
+        <span class="tl-badge badge-mgmt">Management</span>
+      </div>
+      <div class="tl-company">Contentio Lab</div>
+      <div class="tl-role">Content Project Manager</div>
+      <ul class="tl-points">
+        <li>Managed project timelines and deliverables across content production workflows.</li>
+        <li>Developed organizational and cross-team leadership skills.</li>
+      </ul>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-meta">
+        <span class="tl-date">Ongoing</span>
+        <span class="tl-badge badge-edu">Education</span>
+      </div>
+      <div class="tl-company">B.Sc. CSIT</div>
+      <div class="tl-role">Nepalaya College, Tribhuvan University</div>
+      <ul class="tl-points">
+        <li>Computer Science &amp; Information Technology — theoretical foundations for QA engineering.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">Let's Connect</div>
+    <h2 class="section-title">Get in <em>Touch</em></h2>
+  </div>
+
+  <div class="contact-grid reveal">
+    <div>
+      <p class="contact-bio">
+        Detail-oriented QA Engineer with 2+ years specializing in manual, API, automation, and performance testing. 
+        Always open to interesting VOIP, SaaS, or startup QA opportunities in Kathmandu or remote.
+      </p>
+      <a href="#skills" class="btn btn-outline" style="display:inline-flex;">View my skills →</a>
+    </div>
+
+    <div class="contact-info">
+      <a href="mailto:bhisanyamphurai@gmail.com" class="contact-link">
+        <span class="contact-icon">MAIL</span>
+        <span class="contact-text">bhisanyamphurai@gmail.com</span>
+      </a>
+      <a href="tel:+9779862765300" class="contact-link">
+        <span class="contact-icon">TEL</span>
+        <span class="contact-text">+977 9862765300</span>
+      </a>
+      <div class="contact-link" style="cursor:default;">
+        <span class="contact-icon">LOC</span>
+        <span class="contact-text">Kapan, Kathmandu, Nepal</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-mono">© 2025 Bhisan Rai — QA Engineer</span>
+  <span class="footer-mono">Kapan, Kathmandu</span>
 </footer>
 
-<script src="script.js"></script>
+<script>
+// ─── TYPING EFFECT ───
+const phrases = [
+  'Manual Testing',
+  'API Testing (Postman)',
+  'Cypress Automation',
+  'Playwright Scripts',
+  'JMeter Performance',
+  'VOIP QA',
+  'Appium Mobile Tests',
+];
+let pi = 0, ci = 0, deleting = false;
+const el = document.getElementById('typed-text');
+
+function type() {
+  const word = phrases[pi];
+  if (!deleting) {
+    el.textContent = word.slice(0, ++ci);
+    if (ci === word.length) { deleting = true; setTimeout(type, 1600); return; }
+    setTimeout(type, 68);
+  } else {
+    el.textContent = word.slice(0, --ci);
+    if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; setTimeout(type, 300); return; }
+    setTimeout(type, 36);
+  }
+}
+type();
+
+// ─── SKILLS FILTER ───
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.skill-card').forEach(card => {
+      const match = f === 'all' || card.dataset.cat === f;
+      card.classList.toggle('hidden', !match);
+    });
+  });
+});
+
+// ─── SCROLL REVEAL + SKILL BARS ───
+const bars = document.querySelectorAll('.skill-bar');
+let barsAnimated = false;
+
+function animateBars() {
+  if (barsAnimated) return;
+  const section = document.getElementById('skills');
+  const rect = section.getBoundingClientRect();
+  if (rect.top < window.innerHeight * 0.8) {
+    bars.forEach(bar => {
+      bar.style.width = bar.dataset.w + '%';
+    });
+    barsAnimated = true;
+  }
+}
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal, .tl-item').forEach(el => observer.observe(el));
+
+window.addEventListener('scroll', animateBars, { passive: true });
+animateBars();
+</script>
 </body>
 </html>
